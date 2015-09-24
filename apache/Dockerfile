@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y libpng12-dev libjpeg-dev && rm -rf /var
 	&& docker-php-ext-install gd
 RUN docker-php-ext-install mysqli
 
+# install xcache extension
 RUN curl -SL "http://xcache.lighttpd.net/pub/Releases/3.2.0/xcache-3.2.0.tar.gz" -o xcache.tar.gz \
     && mkdir -p /usr/src/xcache \
 	&& tar -zxf xcache.tar.gz -C /usr/src/xcache --strip-components=1 \
@@ -19,6 +20,7 @@ RUN curl -SL "http://xcache.lighttpd.net/pub/Releases/3.2.0/xcache-3.2.0.tar.gz"
 	&& cp xcache.ini /usr/local/etc/php/conf.d/docker-php-ext-xcache.ini \
 	&& make clean
 
+# install cloudwatch-logs config for apache
 COPY cloudwatch_logs.conf /etc/apache2/conf-enabled/cloudwatch_logs.conf
 
 VOLUME /var/www/html
