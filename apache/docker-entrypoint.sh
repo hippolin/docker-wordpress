@@ -75,6 +75,8 @@ EOPHP
 		chown www-data:www-data wp-config.php
 	fi
 
+	chown -R www-data:www-data .
+
 	# see http://stackoverflow.com/a/2705678/433558
 	sed_escape_lhs() {
 		echo "$@" | sed 's/[]\/$*.^|[]/\\&/g'
